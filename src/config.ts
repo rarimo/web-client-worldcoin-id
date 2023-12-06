@@ -24,34 +24,13 @@ export const RELAYER_RELAY_CHAIN_NAMES: Record<SUPPORTED_CHAINS, string> = {
   XDC: '',
 }
 
-export const config = {
-  API_URL: import.meta.env.VITE_API_URL,
-  APP_NAME: import.meta.env.VITE_APP_NAME,
-  LOG_LEVEL: 'trace' as LogLevelDesc,
-  BUILD_VERSION: packageJson.version || import.meta.env.VITE_APP_BUILD_VERSION,
-
-  RARIMO_CORE_API_URL: import.meta.env.VITE_RARIMO_CORE_API_URL,
-
-  REQUEST_BUILD_SENDER: import.meta.env.VITE_REQUEST_BUILD_SENDER,
-
-  SUPPORTED_CHAINS_DETAILS: (import.meta.env.VITE_SUPPORTED_CHAINS_DETAILS
-    ? JSON.parse(import.meta.env.VITE_SUPPORTED_CHAINS_DETAILS)
-    : FALLBACK_SUPPORTED_CHAINS) as Record<
-    keyof typeof FALLBACK_SUPPORTED_CHAINS,
-    Chain
-  >,
-
-  CALLBACK_URL: import.meta.env.VITE_CALLBACK_URL,
-
-  DEFAULT_CHAIN: import.meta.env.VITE_DEFAULT_CHAIN as SUPPORTED_CHAINS,
-
-  /* eslint-enable */
-} as {
+export const config: {
   API_URL: string
   APP_NAME: string
-  LOG_LEVEL: string
+  LOG_LEVEL: LogLevelDesc
   BUILD_VERSION: string
-  REQUEST_BUILD_SENDER: string
+
+  WORLDCOIN_APP_ID: string
 
   RARIMO_CORE_API_URL: string
 
@@ -60,9 +39,28 @@ export const config = {
     Chain
   >
 
-  CALLBACK_URL: string
   DEFAULT_CHAIN: SUPPORTED_CHAINS
-} & Partial<ContractAddresses>
+} & Partial<ContractAddresses> = {
+  API_URL: import.meta.env.VITE_API_URL,
+  APP_NAME: import.meta.env.VITE_APP_NAME,
+  LOG_LEVEL: 'trace' as LogLevelDesc,
+  BUILD_VERSION: packageJson.version || import.meta.env.VITE_APP_BUILD_VERSION,
+
+  WORLDCOIN_APP_ID: import.meta.env.VITE_WORLDCOIN_APP_ID,
+
+  RARIMO_CORE_API_URL: import.meta.env.VITE_RARIMO_CORE_API_URL,
+
+  SUPPORTED_CHAINS_DETAILS: (import.meta.env.VITE_SUPPORTED_CHAINS_DETAILS
+    ? JSON.parse(import.meta.env.VITE_SUPPORTED_CHAINS_DETAILS)
+    : FALLBACK_SUPPORTED_CHAINS) as Record<
+    keyof typeof FALLBACK_SUPPORTED_CHAINS,
+    Chain
+  >,
+
+  DEFAULT_CHAIN: import.meta.env.VITE_DEFAULT_CHAIN as SUPPORTED_CHAINS,
+
+  /* eslint-enable */
+}
 
 Object.assign(config, {
   ...(Object.keys(config.SUPPORTED_CHAINS_DETAILS).reduce(

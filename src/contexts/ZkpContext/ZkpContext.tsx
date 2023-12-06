@@ -1,41 +1,36 @@
 import { config, RELAYER_RELAY_CHAIN_NAMES } from '@config'
 import { fetcher, FetcherError } from '@distributedlab/fetcher'
 import { Token, type ZKProof } from '@iden3/js-jwz'
+import { type ISuccessResult } from '@worldcoin/idkit'
 import { BigNumber, providers } from 'ethers'
 import { createContext, FC, HTMLAttributes, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 
 import { useWeb3Context } from '@/contexts'
-import { ClaimTypes } from '@/contexts/ZkpContext/enums'
-import { buildRequestOnChain, getJWZ } from '@/contexts/ZkpContext/helpers'
 import { RoutesPaths } from '@/enums'
-import { bus, BUS_EVENTS, sleep } from '@/helpers'
+import { sleep } from '@/helpers'
 
 interface ZkpContextValue {
   isPending?: boolean
 
   jwzToken?: Token
-  proveRequest: string
   verificationSuccessTx: {
     get: string
     set: (tx: string) => void
   }
-
-  createProveRequest: () => Promise<void>
+  handleZkProofGen: (zkProof: ISuccessResult) => void
 }
 
 export const zkpContext = createContext<ZkpContextValue>({
-  proveRequest: '',
   verificationSuccessTx: {
     get: '',
     set: () => {
       throw new TypeError('verificationSuccessTx is not defined')
     },
   },
-
-  createProveRequest: async () => {
-    throw new TypeError('createProveRequest is not defined')
+  handleZkProofGen: () => {
+    throw new TypeError('setZkProof is not defined')
   },
 })
 
@@ -51,8 +46,8 @@ const ZkpContextProvider: FC<Props> = ({ children, ...rest }) => {
 
   const [isPending, setIsPending] = useState(false)
 
+  const [zkProof, setZkProof] = useState<ISuccessResult>()
   const [jwzToken, setJwzToken] = useState<Token>()
-  const [proveRequest, setProveRequest] = useState('')
   const [verificationSuccessTx, setVerificationSuccessTx] = useState<string>('')
 
   const { provider } = useWeb3Context()
@@ -240,51 +235,12 @@ const ZkpContextProvider: FC<Props> = ({ children, ...rest }) => {
     [getClaimStatesValidity, getGistStateValidity],
   )
 
-  const startListeningProve = useCallback(
-    async (jwt: string, verificationId: string) => {
-      let jwz = ''
-
-      do {
-        try {
-          jwz = await getJWZ(jwt, verificationId)
-        } catch (error) {
-          /* empty */
-        }
-        await sleep(3000)
-      } while (!jwz)
-
-      const jwzToken = await Token.parse(jwz)
-      setJwzToken(jwzToken)
-
-      setIsPending(true)
-
-      if (!(await isStateTransitionValid(jwzToken))) {
-        bus.emit(
-          BUS_EVENTS.warning,
-          `Something wen wrong, looks like you need to regenerate proof, please reload page and try again`,
-        )
-
-        return
-      }
-
-      navigate(RoutesPaths.authConfirmation)
-    },
-    [isStateTransitionValid, navigate],
-  )
-
-  const createProveRequest = useCallback(async () => {
-    const proveRequest = await buildRequestOnChain(
-      config.CALLBACK_URL,
-      ClaimTypes.KYCAgeCredential,
-    )
-
-    setProveRequest(JSON.stringify(proveRequest.request))
-
-    startListeningProve(proveRequest.jwtToken, proveRequest.request.id)
-  }, [startListeningProve])
+  const handleZkProofGen = useCallback((zkProof: ISuccessResult) => {
+    console.log(zkProof)
+  }, [])
 
   useEffectOnce(() => {
-    if (!jwzToken && !proveRequest && !verificationSuccessTx) {
+    if (!jwzToken && !verificationSuccessTx) {
       navigate(RoutesPaths.app)
     }
   })
@@ -295,14 +251,12 @@ const ZkpContextProvider: FC<Props> = ({ children, ...rest }) => {
         isPending,
 
         jwzToken,
-        proveRequest,
-
-        createProveRequest,
 
         verificationSuccessTx: {
           get: verificationSuccessTx,
           set: setVerificationSuccessTx,
         },
+        handleZkProofGen,
       }}
       {...rest}
     >
