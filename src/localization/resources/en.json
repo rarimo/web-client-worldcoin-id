@@ -1,0 +1,36 @@
+{
+  "validations": {
+    "field-error_required": "Please fill out this field",
+    "field-error_minLength": "This field must contain minimum {{minLength}} symbols",
+    "field-error_maxLength": "This field must contain maximum {{maxLength}} symbols"
+  },
+  "errors": {
+    "default": "Something went wrong"
+  },
+  "notifications": {
+    "default-title-success": "Success",
+    "default-title-error": "Error",
+    "default-title-warning": "Warning",
+    "default-title-info": "Info",
+    "default-title-default": "Just a message",
+    "default-message-success": "Action successful",
+    "default-message-error": "Something went wrong",
+    "default-message-warning": "Something you are doing is not recommended",
+    "default-message-info": "Something is happening. Just want you to know that",
+    "default-message-default": "Just a message",
+
+    "tx-pending-title": "Transaction pending",
+    "tx-pending-message": "Your transaction in progress, please wait until it will be mined",
+
+    "tx-success-title": "Transaction success",
+    "tx-success-message": "Your transaction was successfully mined",
+
+    "tx-error-title": "Transaction error",
+    "tx-error-message": "Your transaction was failed"
+  },
+  "verifier-errors": {
+    "conflict-addresses-identity": "This address has already been used to verify another identity. Please use another address.",
+    "conflict-identity-id": "This identity has already been verified by another address. Please use another identity.",
+    "empty-state": "The state doesn't exist in the state contract. Please wait a couple of minutes and try again later."
+  }
+}

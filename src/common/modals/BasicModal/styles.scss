@@ -1,0 +1,38 @@
+$padding-side: toRem(24);
+
+.basic-modal__pane {
+  --basic-modal-max-width: #{toRem(400)};
+
+  background: var(--background-primary-main);
+  max-width: var(--basic-modal-max-width);
+}
+
+.basic-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: toRem(1) solid rgba(0, 0, 0, 0.05);
+  padding: $padding-side;
+}
+
+.basic-modal__header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(8);
+}
+
+.basic-modal__title {
+  font-size: toRem(20);
+  font-weight: 600;
+  color: var(--text-primary-main);
+}
+
+.basic-modal__subtitle {
+  font-size: toRem(14);
+  line-height: 1.45;
+  color: var(--text-secondary-main);
+}
+
+.basic-modal__body {
+  padding: $padding-side;
+}

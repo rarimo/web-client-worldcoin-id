@@ -1,0 +1,79 @@
+$white: #ffffff;
+$white-rgb: hexToRGB($white);
+$black: #000000;
+$black-rgb: hexToRGB($black);
+
+$background-primary-light: #fbfbfb;
+$background-primary-main: #fbfbfb;
+$background-primary-dark: #fbfbfb;
+
+$background-secondary-light: #ffffff;
+$background-secondary-main: #ffffff;
+$background-secondary-dark: #ffffff;
+
+/* status colors */
+
+$success-light: #4e9e7f1a;
+$success-main: #4e9e7f;
+$success-dark: #4e9e7f;
+
+$error-light: #fff2f2;
+$error-main: #dd2e2e;
+$error-dark: #b3261e;
+
+$warning-light: rgba(#e18e2d, 0.1);
+$warning-main: #f6851b;
+$warning-dark: #e18e2d;
+
+$info-light: #eff2ff;
+$info-main: #40c4ff;
+$info-dark: #0094cc;
+
+/* brand colors */
+
+$primary-light: #4e9e7f;
+$primary-main: #4e9e7f;
+$primary-dark: #4e9e7f;
+
+$primary-light-rgb: hexToRGB($primary-light);
+$primary-main-rgb: hexToRGB($primary-main);
+$primary-dark-rgb: hexToRGB($primary-dark);
+
+$secondary-light: #c2c9dc;
+$secondary-main: #8d91a5;
+$secondary-dark: #5b6271;
+
+/* typography colors */
+
+/* mostly for base text in this app */
+$text-primary-light: #131313;
+$text-primary-main: #131313;
+$text-primary-dark: #131313;
+
+/* mostly for second text in this app */
+$text-secondary-light: rgba($black, 0.6);
+$text-secondary-main: rgba($black, 0.6);
+$text-secondary-dark: rgba($black, 0.6);
+
+/* mostly for title text in this app */
+$text-tertiary-light: #8f8f8f;
+$text-tertiary-main: #8f8f8f;
+$text-tertiary-dark: #8f8f8f;
+
+$text-primary-invert-light: #fbfcff;
+$text-primary-invert-main: #fbfcff;
+$text-primary-invert-dark: #fbfbff;
+
+$text-secondary-invert-light: rgba(#fffbfe, 0.5);
+$text-secondary-invert-main: rgba(#fffbfe, 0.5);
+$text-secondary-invert-dark: rgba(#fffbfe, 0.5);
+
+/* border colors */
+
+$border-primary-light: rgba(0, 0, 0, 0.1);
+$border-primary-main: rgba(0, 0, 0, 0.1);
+$border-primary-dark: rgba(0, 0, 0, 0.1);
+
+$border-secondary-light: #e0e0ec;
+$border-secondary-main: #c4c4d0;
+$border-secondary-dark: #a9abb4;
