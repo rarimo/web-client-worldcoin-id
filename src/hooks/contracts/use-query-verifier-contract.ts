@@ -11,18 +11,18 @@ export const useQueryVerifierContract = () => {
 
   const getProveIdentityTxBody = useCallback(
     (
-      requestId: BigNumberish,
-      inputs_: BigNumberish[],
-      a_: [BigNumberish, BigNumberish],
-      b_: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c_: [BigNumberish, BigNumberish],
+      root_: BigNumberish,
+      signalHash_: BigNumberish,
+      nullifierHash_: BigNumberish,
+      externalNullifierHash_: BigNumberish,
+      proof_: BigNumberish[],
     ) => {
-      const data = contractInterface.encodeFunctionData('submitZKPResponse', [
-        requestId,
-        inputs_,
-        a_,
-        b_,
-        c_,
+      const data = contractInterface.encodeFunctionData('verifyProof', [
+        root_,
+        signalHash_,
+        nullifierHash_,
+        externalNullifierHash_,
+        proof_,
       ])
 
       return {

@@ -5,7 +5,7 @@ interface ImportMetaEnv {
   VITE_APP_NAME: string
   VITE_APP_BUILD_VERSION: string
 
-  VITE_WORLDCOIN_APP_ID: string
+  VITE_WORLDCOIN_APP_ID: `app_${string}`
 
   VITE_RARIMO_CORE_API_URL: string
 

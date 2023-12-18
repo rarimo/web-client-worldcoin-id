@@ -5,8 +5,6 @@ import { FC, HTMLAttributes } from 'react'
 
 import { AppButton, Icon } from '@/common'
 import { useWeb3Context, useZkpContext } from '@/contexts'
-import { CLAIM_TYPES_CHECKS_VALUES_MAP } from '@/contexts/ZkpContext/consts'
-import { ClaimTypes } from '@/contexts/ZkpContext/enums'
 import { ICON_NAMES } from '@/enums'
 import { abbrCenter } from '@/helpers'
 
@@ -15,17 +13,6 @@ type Props = HTMLAttributes<HTMLDivElement>
 const AuthSuccess: FC<Props> = () => {
   const { provider } = useWeb3Context()
   const { verificationSuccessTx } = useZkpContext()
-
-  const METADATA: Record<ClaimTypes, { label: string }> = {
-    [ClaimTypes.KYCAgeCredential]: {
-      label: `Proof of Age: older than ${
-        new Date().getFullYear() -
-        new Date(
-          String(CLAIM_TYPES_CHECKS_VALUES_MAP[ClaimTypes.KYCAgeCredential]),
-        ).getFullYear()
-      }`,
-    },
-  }
 
   return (
     <div className='auth-success'>
@@ -101,22 +88,6 @@ const AuthSuccess: FC<Props> = () => {
             ) : (
               <></>
             )}
-          </div>
-        </div>
-      </div>
-
-      <div className='auth-success__card'>
-        <div className='auth-success__metadata'>
-          <div className='auth-success__metadata-item'>
-            <span className='auth-success__metadata-item-label'>
-              {METADATA[ClaimTypes.KYCAgeCredential].label}
-            </span>
-            <div className='auth-success__metadata-item-value'>
-              <Icon
-                className='auth-success__metadata-item-value-icon'
-                name={ICON_NAMES.checkCircle}
-              />
-            </div>
           </div>
         </div>
       </div>

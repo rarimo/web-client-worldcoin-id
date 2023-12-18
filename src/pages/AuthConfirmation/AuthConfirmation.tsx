@@ -6,7 +6,7 @@ import {
   type EthTransactionResponse,
   PROVIDERS,
 } from '@distributedlab/w3p'
-import type { ZKProof } from '@iden3/js-jwz'
+import { BigNumber, utils } from 'ethers'
 import { FC, HTMLAttributes, useCallback, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,7 +23,7 @@ type Props = HTMLAttributes<HTMLDivElement>
 const AuthConfirmation: FC<Props> = () => {
   const navigate = useNavigate()
 
-  const { jwzToken, verificationSuccessTx } = useZkpContext()
+  const { zkProof, verificationSuccessTx } = useZkpContext()
   const { provider, init } = useWeb3Context()
   const { getProveIdentityTxBody } = useQueryVerifierContract()
 
@@ -54,21 +54,19 @@ const AuthConfirmation: FC<Props> = () => {
     setIsSubmitting(true)
 
     try {
-      if (!jwzToken) throw new TypeError('ZKP is not defined')
+      if (!zkProof) throw new TypeError('ZKP is not defined')
 
-      const zkProofPayload = JSON.parse(jwzToken.getPayload())
-
-      const zkProof = zkProofPayload.body.scope[0] as ZKProof
+      const unpackedProof = utils.defaultAbiCoder.decode(
+        ['uint256[8]'],
+        zkProof.proof,
+      )[0]
 
       const txBody = getProveIdentityTxBody(
-        '1',
-        zkProof.pub_signals.map(el => BigInt(el)),
-        [zkProof.proof.pi_a[0], zkProof.proof.pi_a[1]],
-        [
-          [zkProof.proof.pi_b[0][1], zkProof.proof.pi_b[0][0]],
-          [zkProof.proof.pi_b[1][1], zkProof.proof.pi_b[1][0]],
-        ],
-        [zkProof.proof.pi_c[0], zkProof.proof.pi_c[1]],
+        zkProof.merkle_root,
+        BigNumber.from(provider?.address).shr(8),
+        zkProof.nullifier_hash,
+        0,
+        unpackedProof,
       )
 
       const tx = await provider?.signAndSendTx?.({
@@ -87,8 +85,8 @@ const AuthConfirmation: FC<Props> = () => {
 
     setIsSubmitting(false)
   }, [
+    zkProof,
     getProveIdentityTxBody,
-    jwzToken,
     navigate,
     provider,
     selectedChainToPublish,

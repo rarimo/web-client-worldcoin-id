@@ -30,7 +30,7 @@ export const config: {
   LOG_LEVEL: LogLevelDesc
   BUILD_VERSION: string
 
-  WORLDCOIN_APP_ID: string
+  WORLDCOIN_APP_ID: `app_${string}`
 
   RARIMO_CORE_API_URL: string
 

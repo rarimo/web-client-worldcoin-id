@@ -47,7 +47,7 @@ const AuthProof: FC<Props> = () => {
           <div className='auth-proof__card'>
             <div className='auth-proof__card-header'>
               <div className='auth-proof__card-qr-wrp'>
-                {provider?.isConnected && provider?.address ? (
+                {provider?.isConnected ? (
                   <IDKitWidget
                     signal={provider.address}
                     action='your-action'
