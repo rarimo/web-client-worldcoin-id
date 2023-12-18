@@ -56,6 +56,26 @@ const AuthConfirmation: FC<Props> = () => {
     try {
       if (!zkProof) throw new TypeError('ZKP is not defined')
 
+      if (!provider?.address) throw new TypeError('Provider is not defined')
+
+      const hashToField = (value: string) => {
+        return BigNumber.from(
+          utils.keccak256(utils.solidityPack(['bytes'], [value])),
+        ).shr(8)
+      }
+
+      const externalNullifierHash = hashToField(
+        utils.solidityPack(
+          ['uint256', 'string'],
+          [
+            hashToField(
+              utils.solidityPack(['string'], [config.WORLDCOIN_APP_ID]),
+            ).toHexString(),
+            'your-action',
+          ],
+        ),
+      )
+
       const unpackedProof = utils.defaultAbiCoder.decode(
         ['uint256[8]'],
         zkProof.proof,
@@ -63,10 +83,10 @@ const AuthConfirmation: FC<Props> = () => {
 
       const txBody = getProveIdentityTxBody(
         zkProof.merkle_root,
-        BigNumber.from(provider?.address).shr(8),
+        hashToField(provider.address).toHexString(),
         zkProof.nullifier_hash,
-        0,
-        unpackedProof,
+        externalNullifierHash.toHexString(),
+        unpackedProof.map((el: unknown) => BigNumber.from(el).toHexString()),
       )
 
       const tx = await provider?.signAndSendTx?.({
