@@ -1,6 +1,7 @@
-import { fetcher, FetcherError } from '@distributedlab/fetcher'
+import { fetcher } from '@distributedlab/fetcher'
 import { type ISuccessResult } from '@worldcoin/idkit'
 import { providers } from 'ethers'
+import get from 'lodash/get'
 import { createContext, FC, HTMLAttributes, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
@@ -78,11 +79,7 @@ const ZkpContextProvider: FC<Props> = ({ children, ...rest }) => {
 
   const handleStateValidatingError = useCallback(
     (error: unknown) => {
-      if (!(error instanceof FetcherError)) throw error
-
-      if (!('code' in error.response.data)) throw error
-
-      return validateStateStatusCode(String(error.response.data.code))
+      return validateStateStatusCode(String(get(error, 'response.data.code')))
     },
     [validateStateStatusCode],
   )
@@ -106,7 +103,7 @@ const ZkpContextProvider: FC<Props> = ({ children, ...rest }) => {
 
         await waitTx(data?.tx)
 
-        return false
+        return true
       } catch (error) {
         // TODO: if error === 400(3) how should we wait transit tx?
         return handleStateValidatingError(error)
@@ -160,9 +157,11 @@ const ZkpContextProvider: FC<Props> = ({ children, ...rest }) => {
         return
       }
 
+      navigate(RoutesPaths.authConfirmation)
+
       setIsPending(false)
     },
-    [isStateTransitionValid],
+    [isStateTransitionValid, navigate],
   )
 
   useEffectOnce(() => {
