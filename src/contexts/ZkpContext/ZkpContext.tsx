@@ -101,6 +101,8 @@ const ZkpContextProvider: FC<Props> = ({ children, ...rest }) => {
 
         if (!data?.tx) throw new Error('tx is not defined')
 
+        // FIXME: waitTx throws error and catch
+        //  returns 400(3) - so it return true
         await waitTx(data?.tx)
 
         return true

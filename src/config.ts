@@ -17,11 +17,11 @@ type ContractAddresses = {
 
 export const RELAYER_RELAY_CHAIN_NAMES: Record<SUPPORTED_CHAINS, string> = {
   SEPOLIA: 'Sepolia',
-  POLYGON: '',
-  POLYGON_TESTNET: '',
-  MAINNET: '',
-  ARBITRUM: '',
-  XDC: '',
+  POLYGON: 'Polygon',
+  POLYGON_TESTNET: 'Mumbai',
+  MAINNET: 'Ethereum',
+  ARBITRUM: 'Arbitrum',
+  XDC: 'Xdc',
 }
 
 export const config: {
