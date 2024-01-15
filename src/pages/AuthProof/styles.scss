@@ -31,6 +31,10 @@
   padding: 0;
 }
 
+.auth-proof__card-btn, .auth-proof__connect-btn {
+  width: 100%;
+}
+
 .auth-proof__card-header {
   display: flex;
   justify-content: center;

@@ -55,7 +55,11 @@ const AuthProof: FC<Props> = () => {
                     app_id={config.WORLDCOIN_APP_ID}
                   >
                     {({ open }) => (
-                      <AppButton text={'verify with world id'} onClick={open} />
+                      <AppButton
+                        className='auth-proof__card-btn'
+                        text={'verify with world id'}
+                        onClick={open}
+                      />
                     )}
                   </IDKitWidget>
                 ) : (
