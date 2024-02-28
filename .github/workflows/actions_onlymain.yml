@@ -29,8 +29,9 @@ jobs:
           echo $GITHUB_SHA
       - name: Run Build
         run: |
+          cp .env-development .env
           . $(werf ci-env github --as-file)
-          werf export web --tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+          werf export --dev web --tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
 
   deploy:
     name: Deploy
