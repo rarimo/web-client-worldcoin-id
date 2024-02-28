@@ -20,9 +20,9 @@
     "generate-ether-types": "typechain --target=ethers-v5 'abis/**/*.json' --out-dir src/types/contracts"
   },
   "dependencies": {
-    "@distributedlab/jac": "^0.2.0-rc.25",
-    "@distributedlab/tools": "^0.2.0-rc.25",
-    "@distributedlab/w3p": "^0.2.0-rc.25",
+    "@distributedlab/jac": "^1.0.0-rc.12",
+    "@distributedlab/tools": "^1.0.0-rc.12",
+    "@distributedlab/w3p": "^1.0.0-rc.12",
     "@iden3/js-crypto": "1.0.0-beta.1",
     "@iden3/js-iden3-core": "1.0.0-beta.2",
     "@iden3/js-jsonld-merklization": "1.0.0-beta.14",
