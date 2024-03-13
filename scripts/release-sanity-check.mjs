@@ -67,7 +67,7 @@ function validateChangelogHasVersionOnTop () {
 }
 
 function validateChangelogAnchorsLegend () {
-  const baseRepoUrl = 'https://gitlab.com/distributed_lab/frontend/react-template'
+  const baseRepoUrl = 'https://github.com/rarimo/web-client-worldcoin-id'
   const anyReleaseTagRe =
     /## \[\d+\.\d+\.\d+((-rc|-x)\.\d+)?\] - \d{4}-\d{2}-\d{2}/gi
 
