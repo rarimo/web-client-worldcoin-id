@@ -7,11 +7,9 @@
     "pre-push": "yarn rsc"
   },
   "scripts": {
-    "vite-dev-server": "vite",
-    "vite-build": "vite build",
-    "start": "dotenv -e .env.local yarn vite-dev-server",
-    "build": "dotenv -e .env.production yarn vite-build",
-    "analyze": "dotenv -e .env.analyze yarn vite-build",
+    "build": "dotenv -e .env vite build",
+    "start": "dotenv -e .env vite",
+    "analyze": "vite build --mode analyze",
     "lint": "yarn lint:styles && yarn lint:scripts",
     "lint:styles": "stylelint \"src/**/*.{css,sass,scss}\" --max-warnings=0",
     "lint:scripts": "eslint \"{src,config}/**/*.{js,ts,jsx,tsx}\" --cache --fix --max-warnings=0",
@@ -20,9 +18,9 @@
     "generate-ether-types": "typechain --target=ethers-v5 'abis/**/*.json' --out-dir src/types/contracts"
   },
   "dependencies": {
-    "@distributedlab/jac": "^0.2.0-rc.25",
-    "@distributedlab/tools": "^0.2.0-rc.25",
-    "@distributedlab/w3p": "^0.2.0-rc.25",
+    "@distributedlab/jac": "^1.0.0-rc.12",
+    "@distributedlab/tools": "^1.0.0-rc.12",
+    "@distributedlab/w3p": "^1.0.0-rc.12",
     "@iden3/js-crypto": "1.0.0-beta.1",
     "@iden3/js-iden3-core": "1.0.0-beta.2",
     "@iden3/js-jsonld-merklization": "1.0.0-beta.14",

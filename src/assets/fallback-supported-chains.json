@@ -1,4 +1,17 @@
 {
+  "AVALANCHE": {
+    "id": "43114",
+    "name": "Avalanche C-Chain",
+    "rpcUrl": "https://avax.meowrpc.com",
+    "explorerUrl": "https://snowtrace.io",
+    "token": {
+      "name": "AVAX",
+      "symbol": "AVAX",
+      "decimals": 18
+    },
+    "type": "EVM",
+    "icon": "avalanche"
+  },
   "SEPOLIA": {
     "id": "11155111",
     "name": "Sepolia",
