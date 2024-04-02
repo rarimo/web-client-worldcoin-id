@@ -43,7 +43,7 @@ const AuthConfirmation: FC<Props> = () => {
           config.SUPPORTED_CHAINS_DETAILS,
         ) as (keyof typeof config.SUPPORTED_CHAINS_DETAILS)[]
       )?.filter(el =>
-        Boolean(config?.[`SEMAPHORE_VERIFIER_CONTRACT_ADDRESS_${el}`]),
+        Boolean(config?.[`IDENTITY_MANAGER_CONTRACT_ADDRESS_${el}`]),
       ),
     [],
   )
@@ -101,7 +101,7 @@ const AuthConfirmation: FC<Props> = () => {
 
       const tx = await provider?.signAndSendTx?.({
         to: config?.[
-          `SEMAPHORE_VERIFIER_CONTRACT_ADDRESS_${selectedChainToPublish}`
+          `IDENTITY_MANAGER_CONTRACT_ADDRESS_${selectedChainToPublish}`
         ],
         data: txBody,
       })

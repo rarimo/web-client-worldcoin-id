@@ -40,12 +40,12 @@
   },
   "POLYGON_TESTNET": {
     "id": "80001",
-    "name": "Polygon Testnet",
+    "name": "Polygon Mumbai",
     "rpcUrl": "https://endpoints.omniatech.io/v1/matic/mumbai/public",
     "explorerUrl": "https://mumbai.polygonscan.com/",
     "token": {
       "name": "Matic",
-      "symbol": "Matic",
+      "symbol": "MATIC",
       "decimals": 18
     },
     "type": "EVM",
