@@ -10,9 +10,7 @@ import packageJson from '../package.json'
 export type SUPPORTED_CHAINS = keyof typeof FALLBACK_SUPPORTED_CHAINS
 
 type ContractAddresses = {
-  [k in
-    | `QUERY_VERIFIER_CONTRACT_ADDRESS_${SUPPORTED_CHAINS}`
-    | `VERIFIED_SBT_CONTRACT_ADDRESS_${SUPPORTED_CHAINS}`]: string
+  [k in `SEMAPHORE_VERIFIER_CONTRACT_ADDRESS_${SUPPORTED_CHAINS}`]: string
 }
 
 export const RELAYER_RELAY_CHAIN_NAMES: Record<SUPPORTED_CHAINS, string> = {
@@ -69,14 +67,14 @@ Object.assign(config, {
       ...acc,
       /* eslint-disable max-len */
       /* prettier-ignore */
-      [`QUERY_VERIFIER_CONTRACT_ADDRESS_${curr}`]: import.meta.env[`VITE_QUERY_VERIFIER_CONTRACT_ADDRESS_${curr}`] || '',
+      [`SEMAPHORE_VERIFIER_CONTRACT_ADDRESS_${curr}`]: import.meta.env[`VITE_SEMAPHORE_VERIFIER_CONTRACT_ADDRESS_${curr}`] || '',
       /* prettier-ignore */
       [`VERIFIED_SBT_CONTRACT_ADDRESS_${curr}`]: import.meta.env[`VITE_VERIFIED_SBT_CONTRACT_ADDRESS_${curr}`] || '',
     }),
     {},
   ) as {
     [k in
-      | `QUERY_VERIFIER_CONTRACT_ADDRESS_${SUPPORTED_CHAINS}`
+      | `SEMAPHORE_VERIFIER_CONTRACT_ADDRESS_${SUPPORTED_CHAINS}`
       | `VERIFIED_SBT_CONTRACT_ADDRESS_${SUPPORTED_CHAINS}`]: string
   }),
 })

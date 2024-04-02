@@ -45,55 +45,6 @@ const AuthSuccess: FC<Props> = () => {
         </a>
       </div>
 
-      {/* eslint-disable */}
-      {/*<div className='auth-success__minted-nft'>*/}
-      {/*  <span className='auth-success__minted-nft-title'>*/}
-      {/*    {`You’ve received the SBT `}*/}
-      {/*  </span>*/}
-
-      {/*  <div className='auth-success__minted-nft-card'>*/}
-      {/*    <div className='auth-success__minted-nft-card-img-wrp'>*/}
-      {/*      <img*/}
-      {/*        src='/images/minted-sbt-stub.png'*/}
-      {/*        alt=''*/}
-      {/*        className='auth-success__minted-nft-card-img'*/}
-      {/*      />*/}
-      {/*    </div>*/}
-
-      {/*    <div className='auth-success__minted-nft-card-details'>*/}
-      {/*      <span className='auth-success__minted-nft-card-title'>*/}
-      {/*        {`PolygonID × Rarimo`}*/}
-      {/*      </span>*/}
-
-      {/*      {config?.[*/}
-      {/*        `VERIFIED_SBT_CONTRACT_ADDRESS_${config.DEFAULT_CHAIN}`*/}
-      {/*      ] ? (*/}
-      {/*        <span className='auth-success__minted-nft-card-subtitle'>*/}
-      {/*          <a*/}
-      {/*            href={provider?.getAddressUrl?.(*/}
-      {/*              config.SUPPORTED_CHAINS_DETAILS[config.DEFAULT_CHAIN],*/}
-      {/*              config[*/}
-      {/*                `VERIFIED_SBT_CONTRACT_ADDRESS_${config.DEFAULT_CHAIN}`*/}
-      {/*              ] ?? '',*/}
-      {/*            )}*/}
-      {/*            target={'_blank'}*/}
-      {/*            rel='noreferrer'*/}
-      {/*          >*/}
-      {/*            {abbrCenter(*/}
-      {/*              config[*/}
-      {/*                `VERIFIED_SBT_CONTRACT_ADDRESS_${config.DEFAULT_CHAIN}`*/}
-      {/*              ] ?? '',*/}
-      {/*            )}*/}
-      {/*          </a>*/}
-      {/*        </span>*/}
-      {/*      ) : (*/}
-      {/*        <></>*/}
-      {/*      )}*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-      {/* eslint-enable */}
-
       <AppButton
         className='auth-success__return-btn'
         routePath={'/'}

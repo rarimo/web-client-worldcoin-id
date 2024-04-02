@@ -15,8 +15,7 @@ import { Animation, AppButton, ChainIcon, Dropdown, Icon } from '@/common'
 import { config, SUPPORTED_CHAINS } from '@/config'
 import { useWeb3Context, useZkpContext } from '@/contexts'
 import { ICON_NAMES, RoutesPaths } from '@/enums'
-import { ErrorHandler } from '@/helpers'
-import { useQueryVerifierContract } from '@/hooks/contracts'
+import { createIdentityManager, ErrorHandler } from '@/helpers'
 
 type Props = HTMLAttributes<HTMLDivElement>
 
@@ -25,7 +24,6 @@ const AuthConfirmation: FC<Props> = () => {
 
   const { zkProof, verificationSuccessTx } = useZkpContext()
   const { provider, init } = useWeb3Context()
-  const { getProveIdentityTxBody } = useQueryVerifierContract()
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -45,7 +43,7 @@ const AuthConfirmation: FC<Props> = () => {
           config.SUPPORTED_CHAINS_DETAILS,
         ) as (keyof typeof config.SUPPORTED_CHAINS_DETAILS)[]
       )?.filter(el =>
-        Boolean(config?.[`QUERY_VERIFIER_CONTRACT_ADDRESS_${el}`]),
+        Boolean(config?.[`SEMAPHORE_VERIFIER_CONTRACT_ADDRESS_${el}`]),
       ),
     [],
   )
@@ -56,7 +54,8 @@ const AuthConfirmation: FC<Props> = () => {
     try {
       if (!zkProof) throw new TypeError('ZKP is not defined')
 
-      if (!provider?.address) throw new TypeError('Provider is not defined')
+      if (!provider?.address || !provider.rawProvider)
+        throw new TypeError('Provider is not defined')
 
       const hashToField = (value: string) => {
         return BigNumber.from(
@@ -81,19 +80,30 @@ const AuthConfirmation: FC<Props> = () => {
         zkProof.proof,
       )[0]
 
-      const txBody = getProveIdentityTxBody(
-        zkProof.merkle_root,
-        hashToField(provider.address).toHexString(),
-        zkProof.nullifier_hash,
-        externalNullifierHash.toHexString(),
-        unpackedProof.map((el: unknown) => BigNumber.from(el).toHexString()),
+      const identityManagerContract = createIdentityManager(
+        '',
+        provider.rawProvider,
       )
+
+      const txBody =
+        identityManagerContract.contractInterface.encodeFunctionData(
+          'verifyProof',
+          [
+            zkProof.merkle_root,
+            hashToField(provider.address).toHexString(),
+            zkProof.nullifier_hash,
+            externalNullifierHash.toHexString(),
+            unpackedProof.map((el: unknown) =>
+              BigNumber.from(el).toHexString(),
+            ),
+          ],
+        )
 
       const tx = await provider?.signAndSendTx?.({
         to: config?.[
-          `QUERY_VERIFIER_CONTRACT_ADDRESS_${selectedChainToPublish}`
+          `SEMAPHORE_VERIFIER_CONTRACT_ADDRESS_${selectedChainToPublish}`
         ],
-        ...txBody,
+        data: txBody,
       })
 
       verificationSuccessTx.set((tx as EthTransactionResponse).transactionHash)
@@ -106,7 +116,6 @@ const AuthConfirmation: FC<Props> = () => {
     setIsSubmitting(false)
   }, [
     zkProof,
-    getProveIdentityTxBody,
     navigate,
     provider,
     selectedChainToPublish,
