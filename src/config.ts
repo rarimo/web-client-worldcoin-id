@@ -23,6 +23,7 @@ export const RELAYER_RELAY_CHAIN_NAMES: Record<SUPPORTED_CHAINS, string> = {
   ARBITRUM: 'Arbitrum',
   XDC: 'Xdc',
   AVALANCHE: 'Avalanche',
+  FUJI: 'Fuji',
 }
 
 export const config: {

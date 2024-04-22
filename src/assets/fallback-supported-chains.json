@@ -12,6 +12,19 @@
     "type": "EVM",
     "icon": "avalanche"
   },
+  "FUJI": {
+    "id": "43113",
+    "name": "Avalance Fuji Testnet",
+    "rpcUrl": "https://avalanche-fuji-c-chain-rpc.publicnode.com",
+    "explorerUrl": "https://testnet.snowtrace.io",
+    "token": {
+      "name": "AVAX",
+      "symbol": "AVAX",
+      "decimals": 18
+    },
+    "type": "EVM",
+    "icon": "avalanche"
+  },
   "SEPOLIA": {
     "id": "11155111",
     "name": "Sepolia",
