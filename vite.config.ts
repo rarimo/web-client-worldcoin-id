@@ -24,6 +24,9 @@ export default defineConfig(({ mode }) => {
   // const buildVersion = env.VITE_APP_BUILD_VERSION
 
   return {
+    test: {
+      environment: 'jsdom',
+    },
     ...(env.VITE_PORT
       ? {
           server: {

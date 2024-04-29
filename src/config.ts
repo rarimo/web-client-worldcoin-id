@@ -1,6 +1,6 @@
 import type { Chain } from '@distributedlab/w3p'
-import mapKeys from 'lodash/mapKeys'
-import pickBy from 'lodash/pickBy'
+// import mapKeys from 'lodash/mapKeys'
+// import pickBy from 'lodash/pickBy'
 import { LogLevelDesc } from 'loglevel'
 
 import FALLBACK_SUPPORTED_CHAINS from '@/assets/fallback-supported-chains.json'
@@ -82,14 +82,14 @@ Object.assign(config, {
   }),
 })
 
-Object.assign(config, _mapEnvCfg(import.meta.env))
-Object.assign(config, _mapEnvCfg(window.document.ENV))
+// Object.assign(config, _mapEnvCfg(import.meta.env))
+// Object.assign(config, _mapEnvCfg(window.document.ENV))
 
-function _mapEnvCfg(env: ImportMetaEnv | typeof window.document.ENV): {
-  [k: string]: string | boolean | undefined
-} {
-  return mapKeys(
-    pickBy(env, (v, k) => k.startsWith('VITE_APP_')),
-    (v, k) => k.replace(/^VITE_APP_/, ''),
-  )
-}
+// function _mapEnvCfg(env: ImportMetaEnv | typeof window.document.ENV): {
+//   [k: string]: string | boolean | undefined
+// } {
+//   return mapKeys(
+//     pickBy(env, (v, k) => k.startsWith('VITE_APP_')),
+//     (v, k) => k.replace(/^VITE_APP_/, ''),
+//   )
+// }
