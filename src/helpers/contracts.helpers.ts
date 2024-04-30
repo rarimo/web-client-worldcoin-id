@@ -19,9 +19,24 @@ const createContract = <F extends AbstractFactoryClass>(
   provider: RawProvider,
   factoryClass: F,
 ): AbstractFactoryClassReturnType<F> => {
+  let isSigner = false
+
+  try {
+    const signer = (provider as unknown as providers.Web3Provider).getSigner()
+
+    isSigner = !!signer._address
+  } catch (error) {
+    isSigner = false
+  }
+
   const contractInstance = factoryClass.connect(
     address,
-    new providers.Web3Provider(provider as providers.ExternalProvider, 'any'),
+    (isSigner
+      ? new providers.Web3Provider(
+          provider as providers.ExternalProvider,
+          'any',
+        )
+      : provider) as unknown as providers.Web3Provider,
   ) as ReturnType<F['connect']>
 
   const contractInterface = factoryClass.createInterface() as ReturnType<
