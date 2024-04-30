@@ -98,7 +98,7 @@ describe('WorldID state replication', () => {
     TIMEOUT,
   )
   it(
-    'Replicated root in destination chain should be valid',
+    'The root should be present on the destination chain',
     async () => {
       const { isValid } = await identityManager.contractInstance.getRootInfo(
         ethers.BigNumber.from(root),
