@@ -62,6 +62,7 @@ export const isStateReplicated = async (
           break
         default:
           isMerkleRootValid = false
+          throw error
       }
     }
 

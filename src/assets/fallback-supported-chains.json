@@ -28,7 +28,7 @@
   "SEPOLIA": {
     "id": "11155111",
     "name": "Sepolia",
-    "rpcUrl": "https://endpoints.omniatech.io/v1/eth/sepolia/public",
+    "rpcUrl": "https://ethereum-sepolia-rpc.publicnode.com",
     "explorerUrl": "https://sepolia.etherscan.io",
     "token": {
       "name": "Sepolia",
