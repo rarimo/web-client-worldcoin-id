@@ -5,3 +5,4 @@ export { IdentityManager__factory } from "./IdentityManager__factory";
 export { QueryVerifier__factory } from "./QueryVerifier__factory";
 export { SemaphoreVerifier__factory } from "./SemaphoreVerifier__factory";
 export { VerifiedSBT__factory } from "./VerifiedSBT__factory";
+export { WorldIDIdentityManagerImplV2__factory } from "./WorldIDIdentityManagerImplV2__factory";

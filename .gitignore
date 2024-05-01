@@ -1,32 +1,56 @@
-.DS_Store
-node_modules/
-OLD/
+# dependencies
+/node_modules
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+package-lock.json
+
+# build
 dist/
-dist-ssr/
+
+# tests
+test/unit/coverage
+
+# os
+.DS_Store
+
+# linters
+.eslintcache
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-test/unit/coverage
 selenium-debug.log
-.eslintcache
-package-lock.json
+stats.html
 
-deprecated
+# typescript
+*.tsbuildinfo
 
-# Editor directories and files
+# editor directories and files
+.vscode/*
+!.vscode/settings.json
 .idea
-.vscode
-.fleet
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.local
-stats.html
-.yarn
-.yarnrc.yml
+*.sw?
 
-.env.production
-.env.development
+# env files
 .env.analyze
-tsconfig.tsbuildinfo
+.env.development
+.env.production
+.env.local
+
+# Sentry Auth Token
+.env.sentry-build-plugin
+
+# IDE files
+.idea
+.vscode

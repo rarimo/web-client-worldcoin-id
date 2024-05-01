@@ -81,7 +81,9 @@ const AuthConfirmation: FC<Props> = () => {
       )[0]
 
       const identityManagerContract = createIdentityManager(
-        '',
+        config?.[
+          `IDENTITY_MANAGER_CONTRACT_ADDRESS_${config.DEFAULT_CHAIN}`
+        ] as string,
         provider.rawProvider,
       )
 

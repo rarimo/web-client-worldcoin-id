@@ -38,8 +38,8 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "tests/**/*.ts",
-    "tests/**/*.tsx",
+    "src/tests/**/*.ts",
+    "src/tests/**/*.tsx",
     "index.d.ts",
     "package.json",
     "src/**/*.json"
