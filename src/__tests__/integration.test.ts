@@ -14,7 +14,7 @@ import { WorldIDIdentityManagerImplV2__factory } from '@/types'
 
 const TIMEOUT = 60_000
 const WORLD_ID_IDENTITY_MANAGER_IMPL_V_2_ADDRESS =
-  '0xe13BFc31f32099F86B24eEbdF00e694F303689ab'
+  '0x928a514350A403e2f5e3288C102f6B1CCABeb37C'
 
 describe('WorldID state replication', () => {
   let root = ''
